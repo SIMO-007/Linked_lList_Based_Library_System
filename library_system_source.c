@@ -976,13 +976,13 @@ printf("\xB2\xB2\xB2\xB2 5=> Gestion des reservations");
 gotoxy(20,15);
 printf("\xB2\xB2\xB2\xB2 6=> Affichage des 3 premiers etudiants ( avec tri par insertion )");
 gotoxy(20,17);
-printf("\xB2\xB2\xB2\xB2 7=> Close program (CELA VA RENITIALISER LA BASE DES DONNEES!!!)");
+printf("\xB2\xB2\xB2\xB2 7=> Fermer le programme (CELA VA RENITIALISER LA BASE DES DONNEES!!!)");
 gotoxy(20,20);
 printf("\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2");
 gotoxy(20,23);
 printf("Enter your choice:");
 gotoxy(30,25);
-printf(" brought to you by:");
+printf(" Fait par :");
 gotoxy(32,27);
 printf("\t MOHAMMED FATHI");
 gotoxy(41,28);
@@ -1017,7 +1017,7 @@ case '7':
 default:
 {
 gotoxy(10,23);
-printf("\aWrong Entry!!Please re-entered correct option");
+printf("\achoix incorrecte!! Le choix doit figurer parmi les options au-dessus. ");
 if(getch()) intro(hl,ha,he,hr);
 }
 }
