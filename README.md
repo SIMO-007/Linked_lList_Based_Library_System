@@ -9,7 +9,7 @@ There is an english and a french version, and it's better to execute the .exe as
 
 For the time being, the database is temporary, so when u close the program, the DB created will be deleted. I'm planning to add a feature to save the DB if wanted .
 
-Here's a graph demonstrating the structure the flow of the program : 
+Here's a graph demonstrating the structure and the flow of the program : 
 
 ![image](https://github.com/SIMO-007/Linked_List_Based_Library_System/assets/105717626/b0143ff5-3cf9-44f7-97dd-4dcee193cca6)
 
