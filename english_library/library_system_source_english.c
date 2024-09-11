@@ -1,23 +1,30 @@
+// import necessary libraries
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <conio.h>
 #include <windows.h>
-COORD coord = {0, 0};
+
+// Define cursor coordenates 
+COORD coord = {0, 0};         
+
+// function that sets cursor position according to input
 void gotoxy(int x, int y)
 {
 coord.X = x; coord.Y = y;
 SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
+// Define the content of the nodes of each linked list 
+
 typedef struct book{
 	char title[50];
 	char authors[100];
 	char edition[50];
 	int nbexemp;
-	struct book* code;
-	struct book* nextbook;
+	struct book* code;       //pointer to the node
+	struct book* nextbook; // pointer the NEXT node in the list
 	
 }Book;
 
@@ -58,6 +65,8 @@ typedef struct sorting{
 	int score;
 }Class;
 
+// function definitions
+
 void intro();
 void rempbook();
 void addbook();
@@ -80,7 +89,7 @@ void sorting();
 void insertionsort();
 
 
-void calculepoints(Book *hl,Sub *ha,Borrow *he,Reservation *hr){
+void calculepoints(Book *hl,Sub *ha,Borrow *he,Reservation *hr){   // inputs to the functions are the heads of the linked lists
 	Sub *pa=NULL;
 	Borrow *pe=NULL;
 	Borrow *pe2=NULL;
@@ -611,17 +620,18 @@ void addbook(Book *head,Sub *ha,Borrow *he,Reservation *hr){
 	system("cls");
 	int x=0;
 	
-	
 	while(p->nextbook != NULL){
 		x++;
 		p=p->nextbook;
 	}
-	if(x!=0){
+	if(x!=0){         // check if the list isn't empty
 	Book* newbook=NULL;
-    newbook = (Book*)malloc(sizeof(Book));
-    p->nextbook=newbook;
-    newbook->nextbook=NULL;
-    rempbook(newbook);
+
+	//allocate memory for the new booknode and add it to the end of the list	
+	newbook = (Book*)malloc(sizeof(Book));
+	p->nextbook=newbook;
+	newbook->nextbook=NULL;
+	rempbook(newbook);    // complete book info
     
 	}
 	else{
@@ -641,12 +651,14 @@ void removebook(Book *hl,Sub *ha,Borrow *he,Reservation *hr){
 	Book *tmp=NULL;
 	Book *prevbook=NULL;
 	p=hl;
+	
 	system("cls");
 	char title[50];
 	gotoxy(20,5);
 	printf("\xB2\xB2\ enter title of the book to remove:");
-	scanf("%s",&title);
-	while(strcmp(p->title,title)!=0){
+	scanf("%s",&title);  //input book title
+	
+	while(strcmp(p->title,title)!=0){  // find the node with the inputed book title 
 		x++;
 		prevbook=p;
 		p=p->nextbook;
@@ -654,14 +666,14 @@ void removebook(Book *hl,Sub *ha,Borrow *he,Reservation *hr){
 			break;
 		}
 	}
-	if(p==NULL){
+	if(p==NULL){  // check if book not node not found
 		gotoxy(20,9);
 		printf("\xB2\xB2\ title incorrect ou book not found");
 		printf("\n back in 2 seconds...");
 		sleep(2);
 		managebook(hl,ha,he,hr);
 	}
-	else{
+	else{  			//free up the node memory and reconnect the chained list (link up the node before nd the one after the freed up node)
 		if(x==0){
 			tmp=p->nextbook;
 			free(p);
@@ -688,15 +700,17 @@ void modifbook(Book *hl,Sub *ha,Borrow *he,Reservation *hr){
 	system("cls");
 	char a[50];
 	int b;
+	
 	Book *p=NULL;
 	p=hl;
+	
 	gotoxy(0,0);
 	printf("\xB2\xB2\ enter book title to modify:");
-	scanf("%s",&a);
+	scanf("%s",&a);  
 	system("cls");
-	while(strcmp(p->title,a)!=0){
+	while(strcmp(p->title,a)!=0){    // find the node with the inputed book title
 		p=p->nextbook;
-		if(p==NULL){
+		if(p==NULL){     // break out of the loop if we checked the whole list
 		break;
 	}
 		
@@ -781,11 +795,11 @@ void addsub(Book*hl,Sub*ha,Borrow *he,Reservation *hr){
 	p=ha;
 	system("cls");
 	int x=0;
-	while(p->nextsub != NULL){
+	while(p->nextsub != NULL){      // TO OPTIMIZE 
 		x++;
 		p=p->nextsub;
 	}
-	if(x!=0){
+	if(x!=0){  // check if the list is empty
 	Sub* newsub=NULL;
     newsub = (Sub*)malloc(sizeof(Sub));
     p->nextsub=newsub;
@@ -830,7 +844,7 @@ void removesub(Book *hl,Sub *ha,Borrow *he,Reservation *hr){
 		sleep(2);
 		managebook(hl,ha,he,hr);
 	}
-	else{
+	else{    
 		if(x==0){
 			tmp=p->nextsub;
 			free(p);
@@ -954,15 +968,14 @@ if(getch()) managebook(hl,ha,he,hr);
 }
 }
 
-void intro(Book*hl,Sub *ha,Borrow *he,Reservation *hr)
+void intro(Book*hl,Sub *ha,Borrow *he,Reservation *hr)      
 {
 system("cls");
 int i;
-gotoxy(20,2);
-
+gotoxy(20,2);    // set cursor position on the terminal window
+	
+// make the ui of the app by printing out charachters 	
 printf("\xB2\xB2\xB2\xB2\xB2\xB2 LIBRARY MANAGEMENT SYSTEM \xB2\xB2\xB2\xB2\xB2\xB2");
-
-
 gotoxy(20,5);
 printf("\xB2\xB2\xB2\xB2 1=> Book management  ");
 gotoxy(20,7);
@@ -992,6 +1005,7 @@ printf(":::::::::::::::::::::::::::::::::::::::::");
 gotoxy(30,32);
 printf(".............................................................>");
 
+// go to the next ui/section depending on the option chosen by the user
 switch(getch())
 {
 case '1':
@@ -1018,6 +1032,7 @@ default:
 {
 gotoxy(10,23);
 printf("\aWrong Entry!!Please re-enter correct option");
+	
 if(getch()) intro(hl,ha,he,hr);
 }
 }
@@ -1026,7 +1041,7 @@ if(getch()) intro(hl,ha,he,hr);
 
 int main(){
 	
-	Book* headbook=NULL;
+	Book* headbook=NULL;                                          // Start the linked lists  by defining the heads(first node the linked list) 
     headbook = (Book*)malloc(sizeof(Book));
     headbook->nextbook=NULL;
     
@@ -1043,7 +1058,7 @@ int main(){
     headreservation->nextreservation=NULL;
     
 
-    intro(headbook,headsub,headborrow,headreservation);
+    intro(headbook,headsub,headborrow,headreservation);  // pass them to the next function
     
 
 	return 0;
